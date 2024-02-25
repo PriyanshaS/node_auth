@@ -18,7 +18,7 @@ if(existingUser){
 }
 else{
     const hashedPassword =await bcryptjs.hash(password , 8);
-    let user = User({
+    let user = new User({
         name,
         email , 
         password: hashedPassword , 
@@ -71,7 +71,7 @@ authRouter.post("/tokenIsValid" , async(req,res)=>{
         const user = await User.findById(verified.id);
         if(!user)
         return res.json(false); 
-        return req.json(true);
+        res.json(true);
     } catch (e) {
         res.status(500).json({error:e.message});
     }
